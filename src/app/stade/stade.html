@@ -1,0 +1,32 @@
+<tbody>
+  @for (stade of stades; track $index) {
+    <tr>
+      <td>{{ stade.idStade }}</td>
+      <td>{{ stade.nomStade }}</td>
+      <td>{{ stade.ville }}</td>
+      <td>{{ stade.capacite }}</td>
+      <td>{{ stade.dateCreation }}</td>
+
+      <td>
+        <a
+          [routerLink]="['/modifier-stade', stade.idStade]"
+          class="btn btn-warning btn-sm me-2">
+          Modifier
+        </a>
+
+        <button
+          (click)="supprimerStade(stade.idStade)"
+          class="btn btn-danger btn-sm">
+          Supprimer
+        </button>
+      </td>
+    </tr>
+  }
+  @empty {
+    <tr>
+      <td colspan="6" class="text-center">
+        Aucun stade trouvé
+      </td>
+    </tr>
+  }
+</tbody>
