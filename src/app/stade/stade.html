@@ -1,32 +1,46 @@
-<tbody>
-  @for (stade of stades; track $index) {
-    <tr>
-      <td>{{ stade.idStade }}</td>
-      <td>{{ stade.nomStade }}</td>
-      <td>{{ stade.ville }}</td>
-      <td>{{ stade.capacite }}</td>
-      <td>{{ stade.dateCreation }}</td>
 
-      <td>
-        <a
-          [routerLink]="['/modifier-stade', stade.idStade]"
-          class="btn btn-warning btn-sm me-2">
-          Modifier
-        </a>
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Liste des Stades</h2>
 
-        <button
-          (click)="supprimerStade(stade.idStade)"
-          class="btn btn-danger btn-sm">
-          Supprimer
-        </button>
-      </td>
-    </tr>
-  }
-  @empty {
-    <tr>
-      <td colspan="6" class="text-center">
-        Aucun stade trouvé
-      </td>
-    </tr>
-  }
-</tbody>
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped text-center align-middle">
+      <thead class="table-dark">
+        <tr>
+          <th>ID</th>
+          <th>Nom du Stade</th>
+          <th>Ville</th>
+          <th>Capacité</th>
+          <th>Date de création</th>
+          <th>Type de stade</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        @for (stade of stades; track stade.idStade) {
+          <tr>
+            <td>{{ stade.idStade }}</td>
+            <td>{{ stade.nomStade }}</td>
+            <td>{{ stade.ville }}</td>
+            <td>{{ stade.capacite }}</td>
+            <td>{{ stade.dateCreation }}</td>
+            <td>{{ stade.typeStade.nomCat }}</td>
+            <td>
+              <a
+                [routerLink]="['/modifier-stade', stade.idStade]"
+                class="btn btn-warning btn-sm me-2">
+                Modifier
+              </a>
+
+              <button
+                class="btn btn-danger btn-sm"
+                (click)="supprimerStade(stade.idStade)">
+                Supprimer
+              </button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

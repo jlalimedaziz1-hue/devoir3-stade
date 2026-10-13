@@ -1,24 +1,29 @@
-import { Component } from '@angular/core';
-import { StadeService } from '../stade.service';
-import { Stade } from '../stade.model';
+import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { Stade } from '../stade.model';
+import { StadeService } from '../stade.service';
 
 @Component({
   selector: 'app-stade',
+  standalone: true,
   imports: [RouterLink],
   templateUrl: './stade.html',
   styleUrl: './stade.css'
 })
-export class StadeComponent {
+export class StadeComponent implements OnInit {
 
   stades: Stade[] = [];
 
-  constructor(private stadeService: StadeService) {
+  constructor(private stadeService: StadeService) {}
+
+  ngOnInit(): void {
     this.stades = this.stadeService.getStades();
   }
 
-  supprimerStade(idStade: number) {
-    this.stadeService.supprimerStade(idStade);
-    this.stades = this.stadeService.getStades();
+  supprimerStade(idStade: number): void {
+    if (confirm('Voulez-vous vraiment supprimer ce stade ?')) {
+      this.stadeService.supprimerStade(idStade);
+      this.stades = this.stadeService.getStades();
+    }
   }
 }
